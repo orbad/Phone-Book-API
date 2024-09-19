@@ -47,7 +47,13 @@ def add_contact(contact: Contact) -> dict[str, Contact]:
     contacts[contact.phone_number] = contact
     return {"added": contact}
 
-# @app.put("/update/{phone_number}")
-# def update(
-#
-# )
+@app.delete("/delete/{phone_number}")
+def delete_contact(phone_number: str) -> dict[str, Contact]:
+
+    if phone_number not in contacts:
+        raise HTTPException(
+            status_code=404, detail=f"Contact with {phone_number=} does not exist."
+        )
+    contact = contacts.pop(phone_number)
+    return {"Deleted contact": contact}
+
