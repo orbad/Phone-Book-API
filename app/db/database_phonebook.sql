@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS phonebook_db;
 USE phonebook_db;
 
 CREATE TABLE contacts (
+
                           id INT AUTO_INCREMENT PRIMARY KEY,
                           phone_number CHAR(10) NOT NULL UNIQUE,
                           first_name VARCHAR(255) NOT NULL,
