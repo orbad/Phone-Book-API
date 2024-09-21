@@ -7,3 +7,4 @@ uvicorn
 sqlalchemy
 pymysql
 cryptography
+python-dotenv

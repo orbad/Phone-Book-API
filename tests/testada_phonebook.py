@@ -3,9 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import Session
-from db import models, schemas
-from db.session import SessionLocal, engine
-from db.models import Base
+from db.session import SessionLocal
 from crud import contact as crud_contact
 import logging
 

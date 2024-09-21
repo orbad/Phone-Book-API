@@ -6,3 +6,4 @@ uvicorn
 sqlalchemy
 pymysql
 cryptography
+python-dotenv~=1.0.1
