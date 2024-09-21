@@ -20,5 +20,12 @@ class Contact(BaseModel):
     phone_number: str
     address: str
 
-    class Config:
-        from_attributes = True
+# Contact Model without ID (used for responses)
+class ContactWithoutID(BaseModel):
+    first_name: str
+    last_name: str
+    phone_number: str
+    address: str
+
+class Config:
+    from_attributes = True

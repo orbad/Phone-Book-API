@@ -8,3 +8,4 @@ sqlalchemy
 pymysql
 cryptography
 python-dotenv
+prometheus-client==0.16.0
