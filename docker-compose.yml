@@ -22,7 +22,8 @@ services:
       - default
 
   api:
-    build: .
+    build:
+      context: ./app
     container_name: api
     restart: always
     ports:
@@ -34,7 +35,7 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
-      - .:/app
+      - ./app:/app
     networks:
       - default
 
