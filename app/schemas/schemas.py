@@ -1,11 +1,11 @@
-from pydantic import BaseModel, constr
+from pydantic import BaseModel, constr, Field
 from typing import Optional
 
 class ContactCreate(BaseModel):
-    first_name: str
-    last_name: str
-    phone_number: constr(min_length=1, max_length=14)# Verifies it's between 1 to 14 (country_prefix + mobile)digits
-    address: str
+    first_name: constr(min_length=1, max_length=255)
+    last_name: constr(min_length=1, max_length=255)
+    phone_number: str = Field(pattern='^\d{1,14}$')# Verifies it's between 1 to 14 (country_prefix + mobile)digits
+    address: constr(min_length=1, max_length=255)
 
 class ContactUpdate(ContactCreate):
     first_name: Optional[str] = None
