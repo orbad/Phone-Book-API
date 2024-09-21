@@ -1,5 +1,4 @@
 # Phone-Book-API
-# Phone-Book-API
 
 A RESTful API for managing contacts in a phone book application, built with FastAPI and MySQL, containerized using Docker and Docker Compose.
 
