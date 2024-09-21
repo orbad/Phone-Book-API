@@ -38,6 +38,7 @@ services:
       - ./app:/app
       - ./wait-for-it.sh:/wait-for-it.sh
     command: ["/bin/sh", "-c", "/wait-for-it.sh db:3306 -- uvicorn main:app --host 0.0.0.0 --port 8000"]
+
     networks:
       - default
 
