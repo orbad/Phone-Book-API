@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from typing import Optional
-from db import models, schemas
+from schemas import schemas
+from models import models
 
 def create_contact(db: Session, contact: schemas.ContactCreate):
     db_contact = models.Contact(
