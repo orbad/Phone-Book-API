@@ -50,7 +50,6 @@ def search_contacts(
     contacts = crud_contact.search_contacts(db=db, phone_number=phone_number, first_name=first_name, last_name=last_name, address=address)
     if not contacts:
         raise HTTPException(status_code=404, detail="No contacts found")
-
     return contacts
 
 # Get all contacts
