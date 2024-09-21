@@ -4,7 +4,7 @@ from typing import Optional
 class ContactCreate(BaseModel):
     first_name: constr(min_length=1, max_length=255)
     last_name: constr(min_length=1, max_length=255)
-    phone_number: str = Field(pattern='^\d{1,14}$')# Verifies it's between 1 to 14 (country_prefix + mobile)digits
+    phone_number: str = Field(pattern='^\d{1,14}$') # Verifies it's a number between 1 to 14 digits
     address: constr(min_length=1, max_length=255)
 
 class ContactUpdate(ContactCreate):

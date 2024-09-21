@@ -79,7 +79,7 @@ def create_contact(contact: schemas.ContactCreate, db: Session = Depends(get_db)
     return db_contact
 
 
-# Get a contact by ID
+# Get a contact
 @app.get("/contacts/search", response_model=list[schemas.ContactWithoutID])
 def search_contacts(
         phone_number: Optional[str] = None,
@@ -96,14 +96,14 @@ def search_contacts(
     return contacts
 
 
-# Get all contacts
+# Get all contacts (10 per page)
 @app.get("/contacts/", response_model=list[schemas.ContactWithoutID])
 def read_contacts(offset: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     contacts = crud_contact.get_contacts(db=db, offset=offset, limit=limit)
     return contacts
 
 
-# Update a contact by ID
+# Update a contact
 @app.put("/contacts/{phone_number}", response_model=schemas.ContactWithoutID)
 def update_contact(phone_number: str, contact: schemas.ContactUpdate, db: Session = Depends(get_db)):
     db_contact = crud_contact.search_contacts(db, phone_number=phone_number)
@@ -121,7 +121,7 @@ def update_contact(phone_number: str, contact: schemas.ContactUpdate, db: Sessio
     return updated_contact
 
 
-# Delete a contact by ID
+# Delete a contact
 @app.delete("/contacts/{phone_number}", response_model=schemas.ContactWithoutID)
 def delete_contact(phone_number: str, db: Session = Depends(get_db)):
     db_contact = crud_contact.delete_contact(db=db, phone_number=phone_number)

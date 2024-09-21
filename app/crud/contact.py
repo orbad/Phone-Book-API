@@ -17,6 +17,7 @@ def create_contact(db: Session, contact: schemas.ContactCreate):
 
 def search_contacts(db: Session, phone_number: Optional[str] = None,first_name: Optional[str] = None, last_name: Optional[str] = None, address: Optional[str] = None):
     query = db.query(models.Contact)
+
     # Apply filters only if the values are provided
     if phone_number:
         query = query.filter(phone_number == models.Contact.phone_number)
