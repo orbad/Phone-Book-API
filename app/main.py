@@ -75,9 +75,10 @@ def search_contacts(
         address: Optional[str] = None,
         db: Session = Depends(get_db)
 ):
+    if all(param is None for param in [phone_number, first_name, last_name, address]):
+        raise HTTPException(status_code=400, detail="At least one search parameter must be provided.")
+
     contacts = crud_contact.search_contacts(db=db, phone_number=phone_number, first_name=first_name, last_name=last_name, address=address)
-    if not contacts:
-        raise HTTPException(status_code=404, detail="No contacts found")
     return contacts
 
 # Get all contacts
@@ -90,7 +91,7 @@ def read_contacts(offset: int = 0, limit: int = 10, db: Session = Depends(get_db
 @app.put("/contacts/{phone_number}", response_model=schemas.ContactWithoutID)
 def update_contact(phone_number: str, contact: schemas.ContactUpdate, db: Session = Depends(get_db)):
     db_contact = crud_contact.search_contacts(db, phone_number=phone_number)
-    if db_contact is None:
+    if db_contact is None or len(db_contact) == 0:
         raise HTTPException(status_code=404, detail="Contact not found")
     else:
         db_contact = db_contact[0]
