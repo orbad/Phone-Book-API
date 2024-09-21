@@ -1,6 +1,7 @@
 # Phone-Book-API
 
-A RESTful API for managing contacts in a phone book application, built with FastAPI and MySQL, containerized using Docker and Docker Compose.
+A RESTful API for managing contacts in a phone book application, built with FastAPI and MySQL, containerized using
+Docker and Docker Compose.
 
 ## Table of Contents
 
@@ -64,7 +65,8 @@ Replace `user`, `password`, and `rootpassword` with your desired credentials.
     - `api`: FastAPI application
     - `prometheus` (optional): For metrics collection
     - `grafana` (optional): For visualization
-- **Prometheus Configuration**: The `prometheus/prometheus.yml` file configures Prometheus to scrape metrics from the API.
+- **Prometheus Configuration**: The `prometheus/prometheus.yml` file configures Prometheus to scrape metrics from the
+  API.
 
 ## Running the Application
 
