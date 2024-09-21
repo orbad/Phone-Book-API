@@ -4,6 +4,7 @@ from typing import Optional
 from fastapi import FastAPI, Depends, HTTPException, Request, Response
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
+from starlette.responses import RedirectResponse
 
 from db.session import Base, engine, get_db
 from schemas import schemas
@@ -31,6 +32,7 @@ REQUEST_LATENCY = Histogram(
     "request_latency_seconds", "Request latency",
     ["app_name", "endpoint"]
 )
+ERROR_COUNT = Counter("error_count", "Counts the number of errors", ["endpoint", "exception_type"])
 
 APP_NAME = "phonebook_api"
 
@@ -39,13 +41,17 @@ APP_NAME = "phonebook_api"
 @app.middleware("http")
 async def metrics_middleware(request: Request, call_next):
     start_time = time.time()
-    response = await call_next(request)
-    process_time = time.time() - start_time
+    try:
+        response = await call_next(request)
+        process_time = time.time() - start_time
 
-    REQUEST_LATENCY.labels(APP_NAME, request.url.path).observe(process_time)
-    REQUEST_COUNT.labels(APP_NAME, request.method, request.url.path, response.status_code).inc()
+        REQUEST_LATENCY.labels(APP_NAME, request.url.path).observe(process_time)
+        REQUEST_COUNT.labels(APP_NAME, request.method, request.url.path, response.status_code).inc()
+        return response
+    except Exception as e:
+        ERROR_COUNT.labels(endpoint=request.url.path, exception_type=type(e).__name__).inc()
+        raise e
 
-    return response
 
 
 # Metrics endpoint
@@ -53,6 +59,9 @@ async def metrics_middleware(request: Request, call_next):
 def metrics():
     return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
+@app.get("/", response_class=RedirectResponse)
+async def redirect_to_contacts():
+    return RedirectResponse("/contacts/")
 
 # Create a contact
 @app.post("/contacts/", response_model=schemas.ContactWithoutID)
