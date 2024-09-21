@@ -14,7 +14,7 @@ services:
     ports:
       - "3306:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "--silent" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "phonebook_db", "--silent" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -22,7 +22,8 @@ services:
       - default
 
   api:
-    build: .
+    build:
+      context: ./app
     container_name: api
     restart: always
     ports:
@@ -34,9 +35,12 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
-      - .:/app
+      - ./app:/app
+      - ./wait-for-it.sh:/wait-for-it.sh
+    command: ["/bin/sh", "-c", "/wait-for-it.sh db:3306 -- uvicorn main:app --host 0.0.0.0 --port 8000"]
     networks:
       - default
+
 
 networks:
   default:
