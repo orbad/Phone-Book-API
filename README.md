@@ -48,12 +48,12 @@ Create a `.env` file in the root directory with the following content:
 # .env
 # Database Configuration
 MYSQL_DATABASE=phonebook_db
-MYSQL_USER=user
-MYSQL_PASSWORD=password
-MYSQL_ROOT_PASSWORD=rootpassword
+MYSQL_USER=pb
+MYSQL_PASSWORD=r00t
+MYSQL_ROOT_PASSWORD=r00t
 
 # SQLAlchemy Database URL
-DATABASE_URL=mysql+pymysql://user:password@db:3306/phonebook_db
+DATABASE_URL=mysql+pymysql://root:r00t@db:3306/phonebook_db
 ```
 
 Replace `user`, `password`, and `rootpassword` with your desired credentials.
