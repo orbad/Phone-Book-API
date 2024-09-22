@@ -78,19 +78,19 @@ docker-compose up --build
 
 ### Access the API
 
-The API will be available at `http://localhost:8000`
+The API will be available at `http://127.0.0.1:8000`
 
 ### Access API Documentation
 
-Visit `http://localhost:8000/docs` for the interactive Swagger UI.
+Visit `http://127.0.0.1:8000/docs` for the interactive Swagger UI.
 
 ### Access Metrics
 
-Metrics are exposed at `http://localhost:8000/metrics`
+Metrics are exposed at `http://127.0.0.1:8000/metrics`
 
 ### Access Grafana Dashboard (Optional)
 
-Grafana is available at `http://localhost:3000`
+Grafana is available at `http://127.0.0.1:3000`
 
 ## API Documentation
 
@@ -152,9 +152,9 @@ Grafana is available at `http://localhost:3000`
 
 ## Metrics and Monitoring
 
-- **Prometheus Metrics**: Exposed at `http://localhost:8000/metrics`
+- **Prometheus Metrics**: Exposed at `http://127.0.0.1:8000/metrics`
 - **Grafana Dashboard**:
-    - URL: `http://localhost:3000`
+    - URL: `http://127.0.0.1:3000`
     - Default Credentials: `admin` / `admin`
     - Add Prometheus as a data source to visualize metrics.
 
