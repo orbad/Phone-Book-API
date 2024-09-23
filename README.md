@@ -36,8 +36,8 @@ Docker and Docker Compose.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/orbad/phonebook_api.git
-cd phonebook_api
+git clone https://github.com/orbad/Phone-Book-API.git
+cd Phone-Book-API
 ```
 
 ### Set Up Environment Variables
